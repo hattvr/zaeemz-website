@@ -842,7 +842,9 @@ a:focus-visible {
 }
 
 .project-kind {
-	justify-self: end;
+	width: 100%;
+	justify-self: stretch;
+	text-align: right;
 	color: var(--ink);
 }
 
