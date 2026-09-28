@@ -49,6 +49,39 @@ onMounted(() => {
 	document.querySelectorAll(".reveal").forEach((el) => reveal.observe(el));
 });
 
+const heroPhrases = [
+	"Software Engineer @ ADP",
+	"Full-Stack Software Developer",
+	"Programming Enthusiast",
+	"Creative Development",
+	"Enhanced AI Workflows",
+];
+const typedText = ref("");
+let typingTimeout: ReturnType<typeof setTimeout> | undefined;
+
+function typeLoop(phraseIndex = 0, charIndex = 0, deleting = false) {
+	const phrase = heroPhrases[phraseIndex] ?? heroPhrases[0]!;
+	if (!deleting) {
+		typedText.value = phrase.slice(0, charIndex + 1);
+		typingTimeout =
+			charIndex + 1 === phrase.length
+				? setTimeout(() => typeLoop(phraseIndex, charIndex, true), 1600)
+				: setTimeout(() => typeLoop(phraseIndex, charIndex + 1, false), 55);
+	} else {
+		typedText.value = phrase.slice(0, charIndex);
+		typingTimeout =
+			charIndex === 0
+				? setTimeout(
+						() => typeLoop((phraseIndex + 1) % heroPhrases.length, 0, false),
+						300,
+					)
+				: setTimeout(() => typeLoop(phraseIndex, charIndex - 1, true), 30);
+	}
+}
+
+onMounted(() => typeLoop());
+onUnmounted(() => clearTimeout(typingTimeout));
+
 const frameworks = [
 	{name: "Python", icon: "/images/frameworks/python.png"},
 	{name: "Java", icon: "/images/frameworks/java.png"},
@@ -172,15 +205,16 @@ const skillGroups = [
 ];
 
 const languages = [
-	{name: "English", level: "Native"},
-	{name: "Urdu", level: "Native"},
-	{name: "Punjabi", level: "Basic"},
+	{name: "English", level: "Native", flag: "\u{1F1FA}\u{1F1F8}"},
+	{name: "Urdu", level: "Native", flag: "\u{1F1F5}\u{1F1F0}"},
+	{name: "Punjabi", level: "Basic", flag: "\u{1F1F5}\u{1F1F0}"},
 ];
 
 const workHistory = [
 	{
 		role: "Software Engineer",
 		company: "ADP",
+		logo: "/images/companies/adp.png",
 		location: "Roseland, New Jersey",
 		period: "August 2026 – Present",
 		bullets: [
@@ -192,6 +226,7 @@ const workHistory = [
 	{
 		role: "Associate Application Developer",
 		company: "ADP",
+		logo: "/images/companies/adp.png",
 		location: "Roseland, New Jersey",
 		period: "July 2023 – August 2026",
 		bullets: [
@@ -203,6 +238,7 @@ const workHistory = [
 	{
 		role: "Senior Developer & Founder",
 		company: "Genshin Wizard",
+		logo: "/images/companies/gw.png",
 		location: "Remote",
 		period: "February 2022 – Present",
 		bullets: [
@@ -272,7 +308,10 @@ const socials = [
 			>
 				<div class="hero-copy">
 					<p class="eyebrow">
-						<span class="status-dot"></span> SOFTWARE ENGINEER @ ADP
+						<span class="status-dot"></span>
+						<span class="typing-text">{{ typedText }}</span
+						><span class="typing-cursor" aria-hidden="true"></span>
+						<span class="sr-only">Software Engineer @ ADP</span>
 					</p>
 					<h1 id="hero-title">
 						Zaeem<span class="hero-period">.</span>
@@ -287,13 +326,18 @@ const socials = [
 						professional experience and honing my soft skills.
 					</p>
 					<div class="hero-actions">
-						<button
-							type="button"
-							class="button button-dark"
-							@click="scrollToTab('Contact')"
-						>
-							Say hello <span aria-hidden="true">↗</span>
-						</button>
+						<div class="hero-buttons">
+							<a href="/cv.pdf" target="_blank" rel="noopener" class="button button-outline">
+								Download CV <span aria-hidden="true">↓</span>
+							</a>
+							<button
+								type="button"
+								class="button button-dark"
+								@click="scrollToTab('Contact')"
+							>
+								Say hello <span aria-hidden="true">↗</span>
+							</button>
+						</div>
 						<p class="hero-location">
 							Carteret, New Jersey<br />Rutgers University, CS
 						</p>
@@ -444,6 +488,9 @@ const socials = [
 							:key="language.name"
 							class="language-item"
 						>
+							<span class="language-flag" aria-hidden="true">{{
+								language.flag
+							}}</span>
 							<span>{{ language.name }}</span>
 							<span class="language-level">{{
 								language.level
@@ -474,22 +521,30 @@ const socials = [
 							class="work-history-item"
 						>
 							<p class="work-history-period">{{ job.period }}</p>
-							<div>
-								<h3>
-									{{ job.role }}
-									<span>· {{ job.company }}</span>
-								</h3>
-								<p class="work-history-location">
-									{{ job.location }}
-								</p>
-								<ul class="work-history-bullets">
-									<li
-										v-for="bullet in job.bullets"
-										:key="bullet"
-									>
-										{{ bullet }}
-									</li>
-								</ul>
+							<div class="work-history-body">
+								<img
+									class="work-history-logo"
+									:src="job.logo"
+									:alt="`${job.company} logo`"
+									loading="lazy"
+								/>
+								<div>
+									<h3>
+										{{ job.role }}
+										<span>· {{ job.company }}</span>
+									</h3>
+									<p class="work-history-location">
+										{{ job.location }}
+									</p>
+									<ul class="work-history-bullets">
+										<li
+											v-for="bullet in job.bullets"
+											:key="bullet"
+										>
+											{{ bullet }}
+										</li>
+									</ul>
+								</div>
 							</div>
 						</article>
 					</div>

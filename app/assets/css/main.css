@@ -1,15 +1,18 @@
 :root {
 	color-scheme: light;
-	--ink: #191d1a;
-	--muted: #666e66;
-	--paper: #f5f6f1;
+	--ink: #0e2634;
+	--muted: #5b7c8c;
+	--paper: #eef6fa;
 	--white: #fff;
-	--line: #d8ddd4;
-	--lime: #d8fa62;
-	--coral: #f16f59;
-	--blue: #78bfc4;
-	--mono: "DM Mono", monospace;
-	--display: "Space Grotesk", sans-serif;
+	--line: #cfe3ea;
+	--lime: #38bdf8;
+	--coral: #14b8a6;
+	--blue: #6366f1;
+	--accent: #0891b2;
+	--accent-dark: #075e6e;
+	--radius: 16px;
+	--mono: "JetBrains Mono", monospace;
+	--display: "Manrope", sans-serif;
 }
 
 * {
@@ -35,7 +38,7 @@ a {
 }
 
 a:focus-visible {
-	outline: 2px solid #19716f;
+	outline: 2px solid var(--accent);
 	outline-offset: 5px;
 }
 
@@ -67,7 +70,7 @@ a:focus-visible {
 
 .wordmark span,
 .hero-period {
-	color: #eb624b;
+	color: var(--accent);
 }
 
 .main-nav {
@@ -92,7 +95,7 @@ a:focus-visible {
 
 .nav-contact span {
 	margin-left: 6px;
-	color: #eb624b;
+	color: var(--accent);
 }
 
 .tab-link {
@@ -112,7 +115,7 @@ a:focus-visible {
 }
 
 .tab-link.active {
-	color: #eb624b;
+	color: var(--accent);
 }
 
 .side-scroll-nav {
@@ -147,7 +150,7 @@ a:focus-visible {
 }
 
 .side-nav-dot.active .side-nav-marker {
-	background: #eb624b;
+	background: var(--accent);
 	transform: scale(1.4);
 }
 
@@ -168,7 +171,7 @@ a:focus-visible {
 .side-nav-dot.active .side-nav-label {
 	opacity: 1;
 	transform: translateX(0);
-	color: #eb624b;
+	color: var(--accent);
 }
 
 @media (max-width: 1200px) {
@@ -223,14 +226,56 @@ a:focus-visible {
 	letter-spacing: 0;
 }
 
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.typing-text {
+	text-transform: uppercase;
+}
+
+.typing-cursor {
+	display: inline-block;
+	width: 1px;
+	height: 11px;
+	margin-left: 2px;
+	background: var(--ink);
+	vertical-align: -1px;
+	animation: cursor-blink 900ms step-end infinite;
+}
+
+@keyframes cursor-blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.typing-cursor {
+		animation: none;
+	}
+}
+
 .status-dot {
 	display: inline-block;
 	width: 8px;
 	height: 8px;
 	margin-right: 9px;
 	border-radius: 50%;
-	background: #5c9c62;
-	box-shadow: 0 0 0 4px #5c9c621c;
+	background: var(--accent);
+	box-shadow: 0 0 0 4px #0891b21c;
 }
 
 .hero h1 {
@@ -242,10 +287,10 @@ a:focus-visible {
 }
 
 .hero-lede {
-	max-width: 390px;
+	max-width: 540px;
 	margin: 27px 0 0;
-	font-size: 23px;
-	line-height: 1.45;
+	font-size: 21px;
+	line-height: 1.55;
 }
 
 .hero-actions {
@@ -255,13 +300,20 @@ a:focus-visible {
 	margin-top: 41px;
 }
 
+.hero-buttons {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
 .button {
 	min-height: 51px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 18px;
-	padding: 0 19px;
+	padding: 0 24px;
+	border-radius: 999px;
 	font-size: 13px;
 	font-weight: 600;
 	transition:
@@ -279,11 +331,26 @@ a:focus-visible {
 }
 
 .button-dark:hover {
-	background: #343a35;
+	background: var(--accent-dark);
 }
 
 .button-dark span {
 	color: var(--lime);
+	font-size: 17px;
+}
+
+.button-outline {
+	color: var(--ink);
+	background: transparent;
+	border: 1.5px solid var(--ink);
+}
+
+.button-outline:hover {
+	background: var(--ink);
+	color: var(--white);
+}
+
+.button-outline span {
 	font-size: 17px;
 }
 
@@ -306,7 +373,7 @@ a:focus-visible {
 
 .hero-index span {
 	padding-inline: 5px;
-	color: #eb624b;
+	color: var(--accent);
 }
 
 .hero-visual {
@@ -410,7 +477,7 @@ a:focus-visible {
 }
 
 .section-heading h2 span {
-	color: #8d968b;
+	color: #7a99a8;
 }
 
 .section-aside {
@@ -439,6 +506,7 @@ a:focus-visible {
 	height: 83px;
 	object-fit: cover;
 	border: 1px solid var(--line);
+	border-radius: 12px;
 	transition: transform 220ms ease;
 }
 
@@ -454,6 +522,7 @@ a:focus-visible {
 .project-row-clickable:focus-visible {
 	background: var(--paper);
 	padding-inline: 16px;
+	border-radius: var(--radius);
 	transform: translateX(4px);
 }
 
@@ -464,11 +533,11 @@ a:focus-visible {
 
 .project-row-clickable:hover .project-copy h3,
 .project-row-clickable:focus-visible .project-copy h3 {
-	color: #527130;
+	color: var(--accent-dark);
 }
 
 .project-row-clickable:focus-visible {
-	outline: 2px solid #19716f;
+	outline: 2px solid var(--accent);
 	outline-offset: -2px;
 }
 
@@ -486,6 +555,22 @@ a:focus-visible {
 
 .work-history-item:last-child {
 	border-bottom: 1px solid var(--line);
+}
+
+.work-history-body {
+	display: flex;
+	gap: 18px;
+}
+
+.work-history-logo {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	object-fit: contain;
+	padding: 8px;
+	background: var(--white);
+	border: 1px solid var(--line);
+	border-radius: 12px;
 }
 
 .work-history-period {
@@ -570,6 +655,7 @@ a:focus-visible {
 	margin-bottom: 90px;
 	background: var(--paper);
 	border: 1px solid var(--line);
+	border-radius: var(--radius);
 }
 
 .education-card h3 {
@@ -642,7 +728,13 @@ a:focus-visible {
 	gap: 6px;
 	padding: 18px 24px;
 	border: 1px solid var(--line);
+	border-radius: var(--radius);
 	font-weight: 600;
+}
+
+.language-flag {
+	font-size: 22px;
+	line-height: 1;
 }
 
 .language-level {
@@ -655,7 +747,7 @@ a:focus-visible {
 
 .contact-details {
 	margin: 14px 0 0;
-	color: #c0c8bf;
+	color: #9dc2d4;
 	font-family: var(--mono);
 	font-size: 12px;
 }
@@ -785,7 +877,7 @@ a:focus-visible {
 }
 
 .about-grid h2 span {
-	color: #527130;
+	color: var(--accent-dark);
 }
 
 .about-copy {
@@ -836,7 +928,7 @@ a:focus-visible {
 }
 
 .contact-inner .eyebrow {
-	color: #c0c8bf;
+	color: #9dc2d4;
 }
 
 .contact-inner h2 {
@@ -852,7 +944,7 @@ a:focus-visible {
 	display: inline-block;
 	margin-top: 20px;
 	padding-bottom: 5px;
-	border-bottom: 1px solid #818a81;
+	border-bottom: 1px solid #3d6577;
 	font-family: var(--mono);
 	font-size: 13px;
 }
@@ -868,7 +960,7 @@ a:focus-visible {
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 95px;
-	border-top: 1px solid #484e49;
+	border-top: 1px solid #1c3e4d;
 }
 
 .footer-wordmark {
@@ -877,7 +969,7 @@ a:focus-visible {
 
 .footer-bottom p,
 .back-top {
-	color: #c0c8bf;
+	color: #9dc2d4;
 	font-family: var(--mono);
 	font-size: 9px;
 }
@@ -917,6 +1009,7 @@ a:focus-visible {
 	padding: 32px 24px;
 	background: var(--paper);
 	border: 1px solid var(--line);
+	border-radius: var(--radius);
 	text-align: center;
 }
 
@@ -950,6 +1043,7 @@ a:focus-visible {
 .frameworks-list li {
 	padding: 18px 22px;
 	border: 1px solid var(--line);
+	border-radius: 12px;
 	font-size: 15px;
 	font-weight: 500;
 }
@@ -1001,6 +1095,7 @@ a:focus-visible {
 	max-height: 480px;
 	object-fit: cover;
 	border: 1px solid var(--line);
+	border-radius: var(--radius);
 }
 
 .project-content-grid {
@@ -1037,20 +1132,21 @@ a:focus-visible {
 	padding: 28px 24px;
 	background: var(--white);
 	border: 1px solid var(--line);
+	border-radius: var(--radius);
 }
 
 .feature-icon {
 	width: 26px;
 	height: 26px;
 	margin-bottom: 16px;
-	color: #527130;
+	color: var(--accent-dark);
 }
 
 .feature-eyebrow {
 	margin: 0 0 14px;
 	font-family: var(--mono);
 	font-size: 12px;
-	color: #527130;
+	color: var(--accent-dark);
 }
 
 .feature-card p:not(.feature-eyebrow) {
@@ -1112,6 +1208,7 @@ a:focus-visible {
 	padding: 9px 16px;
 	background: var(--paper);
 	border: 1px solid var(--line);
+	border-radius: 999px;
 	font-family: var(--mono);
 	font-size: 11px;
 }
@@ -1183,6 +1280,7 @@ a:focus-visible {
 	width: 34px;
 	height: 34px;
 	object-fit: contain;
+	border-radius: 8px;
 	filter: grayscale(1);
 	opacity: 0.6;
 	transition:
