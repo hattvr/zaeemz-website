@@ -1430,6 +1430,8 @@ a:focus-visible {
 	}
 
 	.hero-actions {
+		align-items: flex-start;
+		flex-direction: column;
 		gap: 17px;
 		margin-top: 29px;
 	}
@@ -1450,8 +1452,7 @@ a:focus-visible {
 	}
 
 	.hero-visual {
-		width: calc(100% - 12px);
-		margin-left: 12px;
+		display: none;
 	}
 
 	.workspace-image {
@@ -1484,10 +1485,27 @@ a:focus-visible {
 		font-size: 39px;
 	}
 
+	.main-nav {
+		gap: 12px;
+		font-size: 11px;
+		white-space: nowrap;
+	}
+
 	.project-row {
 		min-height: 128px;
 		grid-template-columns: 22px 56px 1fr;
 		gap: 12px;
+	}
+
+	.service-row {
+		min-height: 0;
+		grid-template-columns: 1fr;
+		gap: 10px;
+		padding-block: 20px;
+	}
+
+	.service-row .project-mark {
+		margin-bottom: 2px;
 	}
 
 	.project-mark {
@@ -1505,8 +1523,38 @@ a:focus-visible {
 		line-height: 1.45;
 	}
 
+	.service-row .project-copy p {
+		max-width: none;
+	}
+
 	.project-kind {
 		display: none;
+	}
+
+	.project-row:has(.project-banner) {
+		grid-template-columns: 1fr;
+		gap: 14px;
+		align-items: start;
+		padding-block: 20px;
+	}
+
+	.project-row:has(.project-banner) .project-banner {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+	}
+
+	.project-row:has(.project-banner) .project-copy p {
+		max-width: none;
+	}
+
+	.work-history-item {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.work-history-body {
+		gap: 12px;
 	}
 
 	.about-section {

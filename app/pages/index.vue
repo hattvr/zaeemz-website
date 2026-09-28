@@ -292,7 +292,7 @@ const workHistory = [
 	},
 ];
 
-const profilePicture = "https://zaeemz.com/wp-content/uploads/pictre.png";
+const profilePicture = "/images/misc/profile.png";
 
 const contactInfo = {
 	location: "Carteret, New Jersey",
