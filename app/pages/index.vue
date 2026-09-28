@@ -362,7 +362,7 @@ const socials = [
 					<div class="hero-actions">
 						<div class="hero-buttons">
 							<a
-								href="/cv.pdf"
+								href="/resume_pdf"
 								target="_blank"
 								rel="noopener"
 								class="button button-outline"
