@@ -135,11 +135,34 @@ const services = [
 	},
 ];
 
-const funFacts = [
-	{label: "Years Experience", value: "11"},
-	{label: "Total Commits", value: "7711+"},
-	{label: "Programming Languages", value: "11"},
-];
+const funFactsFallback = {commits: "7,711+", languages: "11"};
+
+const {data: githubStats} = await useAsyncData("github-stats", () =>
+	$fetch("/api/stats/github"),
+);
+
+const yearsExperience = new Date().getFullYear() - 2015;
+
+const funFacts = computed(() => [
+	{label: "Years Experience", value: `${yearsExperience}+`},
+	{
+		label: "Total Commits",
+		value:
+			typeof githubStats.value?.commits === "number"
+				? `${githubStats.value.commits.toLocaleString()}+`
+				: funFactsFallback.commits,
+	},
+	{
+		label: "Programming Languages",
+		value:
+			typeof githubStats.value?.languages === "number"
+				? `${githubStats.value.languages}`
+				: funFactsFallback.languages,
+	},
+]);
+
+const githubMetricsUrl =
+	"https://raw.githubusercontent.com/hattvr/hattvr/main/github-metrics.svg";
 
 const education = {
 	school: "Rutgers University – New Brunswick, NJ",
@@ -445,6 +468,14 @@ const socials = [
 							<p class="fact-value">{{ fact.value }}</p>
 							<p class="fact-label">{{ fact.label }}</p>
 						</div>
+					</div>
+
+					<div class="github-metrics-card">
+						<img
+							:src="githubMetricsUrl"
+							alt="Zaeem's GitHub activity metrics"
+							loading="lazy"
+						/>
 					</div>
 
 					<div class="section-heading resume-frameworks-heading">

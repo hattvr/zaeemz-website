@@ -111,10 +111,10 @@ public/
 
 ## Available Scripts
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Nuxt development server |
-| `npm run build` | Build the production application |
-| `npm run preview` | Preview the production build locally |
-| `npm run generate` | Generate static output; server API routes need a server runtime to work |
-| `npm run postinstall` | Run `nuxt prepare` after dependency installation |
+| Command               | Purpose                                                                 |
+| --------------------- | ----------------------------------------------------------------------- |
+| `npm run dev`         | Start the Nuxt development server                                       |
+| `npm run build`       | Build the production application                                        |
+| `npm run preview`     | Preview the production build locally                                    |
+| `npm run generate`    | Generate static output; server API routes need a server runtime to work |
+| `npm run postinstall` | Run `nuxt prepare` after dependency installation                        |
