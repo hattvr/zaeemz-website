@@ -36,6 +36,8 @@ export interface Project {
 	href: string;
 	stack?: string;
 	insight: string;
+	/** When set, the detail page fetches live counters from this API route and falls back to `stats` on error. */
+	statsEndpoint?: string;
 	stats: ProjectStat[];
 	features: ProjectFeature[];
 	description: ProjectDescriptionItem[];
@@ -54,9 +56,11 @@ export const projects: Project[] = [
 		href: "https://genshinwizard.com",
 		insight:
 			"Uses advanced python functionality and MongoDB (for database management) to create a Discord bot that supports a multitude of tools for Genshin users. This bot can track in-game statistics, progression, display guides, and showcase them beautifully via embedded messages on Discord. This project has reached over 7.9 million users and is currently used across thousands of different servers on the Discord space; the Genshin Wizard databases maintain and process millions of entries as efficiently as possible.",
+		statsEndpoint: "/api/stats/genshin-wizard",
 		stats: [
 			{label: "Servers", value: "80,600+"},
 			{label: "Users Registered", value: "135,800+"},
+			{label: "Commands", value: "200+"},
 		],
 		features: [
 			{
@@ -144,9 +148,11 @@ export const projects: Project[] = [
 		stack: "Discord.py, MongoDB, Python",
 		insight:
 			"Uses advanced python functionality and MongoDB (for database management) to create a Discord bot that instantly notifies users of an available class section at Rutgers University, New Brunswick. The bot uses asynchronous API requests and advanced logic to send notifications to users within one second of detection of an opening. This bot is currently used by a community with hundreds of thousands of users, allowing Rutgers students an easy and simple way to never miss their classes.",
+		statsEndpoint: "/api/stats/swiftru",
 		stats: [
-			{label: "Sections Monitored", value: "12,094+"},
 			{label: "SwiftRU Users", value: "10,838+"},
+			{label: "Sections Monitored", value: "12,094+"},
+			{label: "Active Snipes", value: "3,200+"},
 		],
 		features: [
 			{

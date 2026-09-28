@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {projects} from "~/data/projects";
+import {projects, type ProjectStat} from "~/data/projects";
 
 const route = useRoute();
 const project = computed(() =>
@@ -13,6 +13,67 @@ if (!project.value) {
 useHead(() => ({
 	title: `${project.value?.name} | Zaeem Zahid`,
 }));
+
+interface GenshinWizardStats {
+	guilds: number | null;
+	users: number | null;
+	commands: number | null;
+}
+
+interface SwiftruStats {
+	users: number | null;
+	sectionsMonitored: number | null;
+	activeSnipes: number | null;
+	error: string | null;
+}
+
+const {data: liveStats} = await useAsyncData<
+	GenshinWizardStats | SwiftruStats | null
+>(`project-stats-${route.params.slug}`, () =>
+	project.value?.statsEndpoint
+		? $fetch(project.value.statsEndpoint)
+		: Promise.resolve(null),
+);
+
+function formatCount(value: number | null | undefined, suffix = "+") {
+	return typeof value === "number"
+		? `${value.toLocaleString()}${suffix}`
+		: null;
+}
+
+const displayStats = computed<ProjectStat[]>(() => {
+	if (!project.value) return [];
+
+	if (project.value.slug === "genshin-wizard" && liveStats.value) {
+		const live = liveStats.value as GenshinWizardStats;
+		const mapped = [
+			{label: "Servers", value: formatCount(live.guilds)},
+			{label: "Users Registered", value: formatCount(live.users)},
+			{label: "Commands", value: formatCount(live.commands, "")},
+		].filter((stat): stat is ProjectStat => stat.value !== null);
+		if (mapped.length) return mapped;
+	}
+
+	if (project.value.slug === "swiftru" && liveStats.value) {
+		const live = liveStats.value as SwiftruStats;
+		if (!live.error) {
+			const mapped = [
+				{label: "SwiftRU Users", value: formatCount(live.users)},
+				{
+					label: "Sections Monitored",
+					value: formatCount(live.sectionsMonitored, ""),
+				},
+				{
+					label: "Active Snipes",
+					value: formatCount(live.activeSnipes, ""),
+				},
+			].filter((stat): stat is ProjectStat => stat.value !== null);
+			if (mapped.length) return mapped;
+		}
+	}
+
+	return project.value.stats;
+});
 
 const statEls: HTMLElement[] = [];
 const setStatRef = (el: unknown) => {
@@ -93,9 +154,9 @@ onMounted(() => {
 						<p>{{ project.insight }}</p>
 					</div>
 
-					<div v-if="project.stats.length" class="facts-grid">
+					<div v-if="displayStats.length" class="facts-grid">
 						<div
-							v-for="stat in project.stats"
+							v-for="stat in displayStats"
 							:key="stat.label"
 							class="fact-card"
 						>
