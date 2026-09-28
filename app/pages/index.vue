@@ -66,16 +66,27 @@ function typeLoop(phraseIndex = 0, charIndex = 0, deleting = false) {
 		typingTimeout =
 			charIndex + 1 === phrase.length
 				? setTimeout(() => typeLoop(phraseIndex, charIndex, true), 1600)
-				: setTimeout(() => typeLoop(phraseIndex, charIndex + 1, false), 55);
+				: setTimeout(
+						() => typeLoop(phraseIndex, charIndex + 1, false),
+						55,
+					);
 	} else {
 		typedText.value = phrase.slice(0, charIndex);
 		typingTimeout =
 			charIndex === 0
 				? setTimeout(
-						() => typeLoop((phraseIndex + 1) % heroPhrases.length, 0, false),
+						() =>
+							typeLoop(
+								(phraseIndex + 1) % heroPhrases.length,
+								0,
+								false,
+							),
 						300,
 					)
-				: setTimeout(() => typeLoop(phraseIndex, charIndex - 1, true), 30);
+				: setTimeout(
+						() => typeLoop(phraseIndex, charIndex - 1, true),
+						30,
+					);
 	}
 }
 
@@ -327,7 +338,12 @@ const socials = [
 					</p>
 					<div class="hero-actions">
 						<div class="hero-buttons">
-							<a href="/cv.pdf" target="_blank" rel="noopener" class="button button-outline">
+							<a
+								href="/cv.pdf"
+								target="_blank"
+								rel="noopener"
+								class="button button-outline"
+							>
 								Download CV <span aria-hidden="true">↓</span>
 							</a>
 							<button
