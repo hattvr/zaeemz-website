@@ -164,13 +164,22 @@ const funFacts = computed(() => [
 const githubMetricsUrl =
 	"https://raw.githubusercontent.com/hattvr/hattvr/main/github-metrics.svg";
 
-const education = {
-	school: "Rutgers University – New Brunswick, NJ",
-	period: "09/2020 – 05/2024",
-	degree: "Bachelor of Science, Computer Science",
-	gpa: "3.76/4.00",
-	minor: "Minor in Business Administration",
-};
+const education = [
+	{
+		school: "Rutgers University – New Brunswick, NJ",
+		period: "09/2020 – 05/2024",
+		degree: "Bachelor of Science, Computer Science",
+		gpa: "3.76/4.00",
+		minor: "Minor in Business Administration",
+	},
+	{
+		school: "Carteret High School",
+		period: "09/2016 – 06/2020",
+		degree: "High School Diploma",
+		gpa: "4.12/4.00",
+		honors: "National Honors Society",
+	},
+];
 
 const skillGroups = [
 	{
@@ -484,21 +493,32 @@ const socials = [
 							<h2>School <span>days.</span></h2>
 						</div>
 					</div>
-					<div class="education-card">
-						<div>
-							<h3>{{ education.school }}</h3>
-							<p class="education-degree">
-								{{ education.degree }}
-							</p>
-							<p class="education-minor">{{ education.minor }}</p>
-						</div>
-						<div class="education-meta">
-							<p class="education-period">
-								{{ education.period }}
-							</p>
-							<p class="education-gpa">
-								GPA: {{ education.gpa }}
-							</p>
+					<div class="education-list">
+						<div
+							v-for="school in education"
+							:key="school.school"
+							class="education-card"
+						>
+							<div>
+								<h3>{{ school.school }}</h3>
+								<p class="education-degree">
+									{{ school.degree }}
+								</p>
+								<p v-if="school.minor" class="education-minor">
+									{{ school.minor }}
+								</p>
+								<p v-if="school.honors" class="education-minor">
+									{{ school.honors }}
+								</p>
+							</div>
+							<div class="education-meta">
+								<p class="education-period">
+									{{ school.period }}
+								</p>
+								<p class="education-gpa">
+									GPA: {{ school.gpa }}
+								</p>
+							</div>
 						</div>
 					</div>
 

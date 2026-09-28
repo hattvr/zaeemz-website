@@ -646,13 +646,18 @@ a:focus-visible {
 	padding-bottom: 3px;
 }
 
+.education-list {
+	display: grid;
+	gap: 15px;
+	margin-bottom: 90px;
+}
+
 .education-card {
 	display: flex;
 	align-items: start;
 	justify-content: space-between;
 	gap: 24px;
 	padding: 32px;
-	margin-bottom: 90px;
 	background: var(--paper);
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
