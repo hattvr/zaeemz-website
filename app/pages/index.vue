@@ -356,9 +356,18 @@ const socials = [
 						><span class="typing-cursor" aria-hidden="true"></span>
 						<span class="sr-only">Software Engineer @ ADP</span>
 					</p>
-					<h1 id="hero-title">
-						Zaeem<span class="hero-period">.</span>
-					</h1>
+					<div class="hero-title-row">
+						<img
+							class="profile-picture hero-mobile-picture"
+							:src="profilePicture"
+							alt="Zaeem Zahid"
+							width="420"
+							height="420"
+						/>
+						<h1 id="hero-title">
+							Zaeem<span class="hero-period">.</span>
+						</h1>
+					</div>
 					<p class="hero-lede">
 						I'm a Rutgers University Computer Science graduate now
 						working as a Software Engineer at ADP, with hands-on

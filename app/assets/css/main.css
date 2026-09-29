@@ -404,6 +404,15 @@ a:focus-visible {
 	border: 1px solid var(--line);
 }
 
+.hero-title-row {
+	display: flex;
+	align-items: center;
+}
+
+.hero-mobile-picture {
+	display: none;
+}
+
 .image-stamp {
 	position: absolute;
 	top: 25px;
@@ -1415,16 +1424,29 @@ a:focus-visible {
 	}
 
 	.hero-copy {
+		width: 100%;
 		padding: 0;
 	}
 
+	.hero-title-row {
+		margin-top: 25px;
+		gap: 12px;
+	}
+
+	.hero-mobile-picture {
+		display: block;
+		width: 72px;
+		flex: 0 0 72px;
+	}
+
 	.hero h1 {
-		margin: 26px 0 8px -4px;
-		font-size: 76px;
+		margin: 0;
+		font-size: 48px;
 	}
 
 	.hero-lede {
-		max-width: 320px;
+		width: 100%;
+		max-width: none;
 		margin-top: 20px;
 		font-size: 19px;
 	}
