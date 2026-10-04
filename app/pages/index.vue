@@ -167,6 +167,7 @@ const githubMetricsUrl =
 const education = [
 	{
 		school: "Rutgers University – New Brunswick, NJ",
+		icon: "/images/education/rutgers.png",
 		period: "09/2020 – 05/2024",
 		degree: "Bachelor of Science, Computer Science",
 		gpa: "3.76/4.00",
@@ -174,6 +175,7 @@ const education = [
 	},
 	{
 		school: "Carteret High School",
+		icon: "/images/education/chs.png",
 		period: "09/2016 – 06/2020",
 		degree: "High School Diploma",
 		gpa: "4.12/4.00",
@@ -508,7 +510,14 @@ const socials = [
 							:key="school.school"
 							class="education-card"
 						>
-							<div>
+							<div
+								class="education-backdrop"
+								:style="{
+									backgroundImage: `url('${school.icon}')`,
+								}"
+								aria-hidden="true"
+							></div>
+							<div class="education-school">
 								<h3>{{ school.school }}</h3>
 								<p class="education-degree">
 									{{ school.degree }}

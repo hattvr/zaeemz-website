@@ -662,6 +662,8 @@ a:focus-visible {
 }
 
 .education-card {
+	position: relative;
+	overflow: hidden;
 	display: flex;
 	align-items: start;
 	justify-content: space-between;
@@ -670,6 +672,22 @@ a:focus-visible {
 	background: var(--paper);
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
+}
+
+.education-backdrop {
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: min(420px, 100%);
+	background-position: -36px calc(50% - 10px);
+	background-repeat: no-repeat;
+	background-size: 300px auto;
+	opacity: 0.15;
+	mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+}
+
+.education-school {
+	position: relative;
+	z-index: 1;
 }
 
 .education-card h3 {
@@ -690,6 +708,8 @@ a:focus-visible {
 }
 
 .education-meta {
+	position: relative;
+	z-index: 1;
 	text-align: right;
 	white-space: nowrap;
 }
