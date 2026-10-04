@@ -1214,6 +1214,47 @@ a:focus-visible {
 
 .service-row {
 	grid-template-columns: 82px 1fr;
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 620ms ease,
+		transform 620ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.service-row.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.service-row .project-mark {
+	transition: transform 220ms ease;
+}
+
+.service-row .project-mark span {
+	transform-origin: center;
+	transition: transform 220ms ease;
+}
+
+@media (hover: hover) {
+	.service-row:hover .project-mark {
+		transform: rotate(-4deg) scale(1.06);
+	}
+
+	.service-row:hover .project-mark span:nth-child(1) {
+		transform: scaleY(0.76);
+	}
+
+	.service-row:hover .project-mark span:nth-child(2) {
+		transform: scaleY(0.88);
+	}
+
+	.service-row:hover .project-mark span:nth-child(3) {
+		transform: scaleY(1.2);
+	}
+
+	.service-row:hover .project-copy h3 {
+		color: var(--accent-dark);
+	}
 }
 
 .resume-section {

@@ -46,7 +46,9 @@ onMounted(() => {
 		},
 		{threshold: 0.15},
 	);
-	document.querySelectorAll(".reveal").forEach((el) => reveal.observe(el));
+	document
+		.querySelectorAll(".reveal, .service-row")
+		.forEach((el) => reveal.observe(el));
 });
 
 const heroPhrases = [
