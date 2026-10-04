@@ -680,7 +680,7 @@ a:focus-visible {
 	width: min(420px, 100%);
 	background-position: -36px calc(50% - 10px);
 	background-repeat: no-repeat;
-	background-size: 300px auto;
+	background-size: 270px auto;
 	opacity: 0.15;
 	mask-image: linear-gradient(to right, #000 0%, transparent 100%);
 }
