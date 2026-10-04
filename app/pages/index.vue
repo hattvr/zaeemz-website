@@ -249,6 +249,21 @@ const skillGroups = [
 	},
 ];
 
+const activeSkillCategory = ref(skillGroups[0]!.category);
+const activeSkillGroup = computed(
+	() =>
+		skillGroups.find(
+			(group) => group.category === activeSkillCategory.value,
+		) ?? skillGroups[0]!,
+);
+const activeSkillNumber = computed(() =>
+	String(
+		skillGroups.findIndex(
+			(group) => group.category === activeSkillCategory.value,
+		) + 1,
+	).padStart(2, "0"),
+);
+
 const languages = [
 	{name: "English", level: "Native", flag: "\u{1F1FA}\u{1F1F8}"},
 	{name: "Urdu", level: "Native", flag: "\u{1F1F5}\u{1F1F0}"},
@@ -546,16 +561,54 @@ const socials = [
 							<h2>The <span>stack.</span></h2>
 						</div>
 					</div>
-					<div class="skills-grid">
+					<div class="skills-explorer">
 						<div
-							v-for="group in skillGroups"
-							:key="group.category"
-							class="skill-group"
+							class="skills-choices"
+							role="group"
+							aria-label="Skill categories"
 						>
-							<p class="skill-category">{{ group.category }}</p>
-							<ul class="frameworks-list">
-								<li v-for="item in group.items" :key="item">
-									{{ item }}
+							<button
+								v-for="(group, index) in skillGroups"
+								:key="group.category"
+								type="button"
+								class="skill-category-button"
+								:class="{
+									'is-active':
+										activeSkillCategory === group.category,
+								}"
+								:aria-pressed="
+									activeSkillCategory === group.category
+								"
+								@click="activeSkillCategory = group.category"
+							>
+								<span class="skill-category-index"
+									>0{{ index + 1 }}</span
+								>
+								<span class="skill-category-name">{{
+									group.category
+								}}</span>
+							</button>
+						</div>
+						<div
+							:key="activeSkillCategory"
+							class="skills-showcase"
+							aria-live="polite"
+						>
+							<div class="skills-showcase-topline">
+								<p>CAPABILITIES / {{ activeSkillNumber }}</p>
+								<p>
+									{{ activeSkillGroup.items.length }} SKILLS
+								</p>
+							</div>
+							<h3>{{ activeSkillGroup.category }}</h3>
+							<ul class="skills-cloud">
+								<li
+									v-for="(item, index) in activeSkillGroup.items"
+									:key="item"
+									class="skill-pill"
+									:style="{'--skill-order': index}"
+								>
+									<span aria-hidden="true">+</span>{{ item }}
 								</li>
 							</ul>
 						</div>
